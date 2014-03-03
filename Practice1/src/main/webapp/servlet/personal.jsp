@@ -10,16 +10,16 @@
 <form method="post" action="Registration">
     <input type=hidden name=action value=aSave>
     First Name:
-    <%= request.getParameter("firstname") %>
-    <input type=hidden name=firstname value= <%= request.getParameter("firstname") %> />
+    <%= request.getParameter("firstName") %>
+    <input type=hidden name=firstName value= <%= request.getParameter("firstName") %> />
     <br>
     Last Name:
-    <%= request.getParameter("lastname") %>
-    <input type=hidden name=lastname value= <%= request.getParameter("lastname") %> />
+    <%= request.getParameter("lastName") %>
+    <input type=hidden name=lastName value= <%= request.getParameter("lastName") %> />
     <br>
     Company Name:
-    <%= request.getParameter("companyname") %>
-    <input type=hidden name=companyname value= <%= request.getParameter("companyname") %> />
+    <%= request.getParameter("company") %>
+    <input type=hidden name=company value= <%= request.getParameter("company") %> />
     <br>
     Hobby:
     <input type=text name=hobby/>

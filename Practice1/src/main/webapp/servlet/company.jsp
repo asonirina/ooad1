@@ -6,20 +6,18 @@
 
 <h1>Person's Company Registration</h1>
 
-<c:set var="contact" value="${contact}" />
 <form method="post" action="Registration">
     <input type=hidden name=action value=aPersonalInfo>
     First Name:
-    <%--<%= request.getParameter("firstname") %>--%>
-    ${contact.firstName}
-    <input type=hidden name=firstname value= <%= request.getParameter("firstname") %> >
+    <%= request.getAttribute("firstName") %>
+    <input type=hidden name=firstName value= <%= request.getAttribute("firstName") %> >
     <br>
     Last Name:
-    <%= request.getParameter("lastname") %>
-    <input type=hidden name=lastname value= <%= request.getParameter("lastname") %> >
+    <%= request.getAttribute("lastName") %>
+    <input type=hidden name=lastName value= <%= request.getAttribute("lastName") %> >
     <br>
     Company Name:
-    <input type=text size=20 name=companyname>
+    <input type=text size=20 name=company>
     <br>
     <input type=submit value=Next>
 

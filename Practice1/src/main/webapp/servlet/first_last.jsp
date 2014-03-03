@@ -10,10 +10,10 @@
 <form method="post" action="Registration" >
     <input type=hidden name=action value=aCompany>
     First Name:
-    <input type=text size=20 name=firstname>
+    <input type=text size=20 name=firstName>
     <br>
     Last Name:
-    <input type=text size=20 name=lastname>
+    <input type=text size=20 name=lastName>
     <br>
     <input type=submit value=Next>
 

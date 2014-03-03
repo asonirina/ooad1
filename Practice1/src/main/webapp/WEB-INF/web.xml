@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>Registration</servlet-name>
-        <servlet-class>com.contact.registration.servlets.ContactRegistrationServlet</servlet-class>
+        <servlet-class>com.contact.registration.servlet.ContactRegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
