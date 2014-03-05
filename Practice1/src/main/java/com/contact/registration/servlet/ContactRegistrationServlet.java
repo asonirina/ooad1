@@ -1,5 +1,6 @@
 package com.contact.registration.servlet;
 
+import com.contact.registration.exception.InvalidLabelException;
 import com.contact.registration.model.Contact;
 import com.contact.registration.service.ContactService;
 
@@ -13,19 +14,16 @@ public class ContactRegistrationServlet extends HttpServlet {
             throws IOException, ServletException {
         response.setContentType("text/html");
         String action = request.getParameter("action");
-        HttpSession session = request.getSession(true);
         if (action != null && action.length() > 0) {
-            session.setAttribute("action", action);
-
             if ("aCompany".equals(action)) {
-                processPageCompany(request, response);
+                processPageCompany(request, response, 1);
             } else if ("aPersonalInfo".equals(action)) {
-                processPagePersonal(request, response);
+                processPagePersonal(request, response, 2);
             } else if ("aSave".equals(action)) {
-                processPageFinal(request, response);
+                processPageFinal(request, response, 3);
             }
-
         } else {
+            request.getSession().setAttribute("current", 0);
             request.getRequestDispatcher("first_last.jsp").forward(request, response);
         }
 
@@ -38,24 +36,36 @@ public class ContactRegistrationServlet extends HttpServlet {
     }
 
 
-    private void processPageCompany (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Contact contact = ContactService.putContact(request);
-        request.setAttribute("firstName", contact.getFirstName());
-        request.setAttribute("lastName", contact.getLastName());
-        request.getRequestDispatcher("company.jsp").forward(request, response);
+    private void processPageCompany(HttpServletRequest request, HttpServletResponse response, int label) throws ServletException, IOException {
+        try {
+            Contact contact = ContactService.putContact(request, label);
+            request.setAttribute("firstName", contact.getFirstName());
+            request.setAttribute("lastName", contact.getLastName());
+            request.getRequestDispatcher("company.jsp").forward(request, response);
+        } catch (InvalidLabelException ex) {
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
-    private void processPagePersonal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Contact contact = ContactService.putContact(request);
-        request.setAttribute("firstName",contact.getFirstName());
-        request.setAttribute("lastName",contact.getLastName());
-        request.setAttribute("company",contact.getCompany());
-        request.getRequestDispatcher("personal.jsp").forward(request, response);
+    private void processPagePersonal(HttpServletRequest request, HttpServletResponse response, int label) throws ServletException, IOException {
+        try {
+            Contact contact = ContactService.putContact(request, label);
+            request.setAttribute("firstName", contact.getFirstName());
+            request.setAttribute("lastName", contact.getLastName());
+            request.setAttribute("company", contact.getCompany());
+            request.getRequestDispatcher("personal.jsp").forward(request, response);
+        } catch (InvalidLabelException ex) {
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
-    private void processPageFinal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ContactService.putContact(request);
-        request.getRequestDispatcher("final.jsp").forward(request, response);
+    private void processPageFinal(HttpServletRequest request, HttpServletResponse response, int label) throws ServletException, IOException {
+        try {
+            ContactService.putContact(request, label);
+            request.getRequestDispatcher("final.jsp").forward(request, response);
+        } catch (InvalidLabelException ex) {
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
 }
