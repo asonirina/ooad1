@@ -1,9 +1,8 @@
 package com.contact.registration.servlet;
 
 import com.contact.registration.command.Command;
+import com.contact.registration.exception.InvalidLabelException;
 import com.contact.registration.factory.CommandFactory;
-import com.contact.registration.model.Contact;
-import com.contact.registration.service.ContactService;
 
 import java.io.*;
 import javax.servlet.*;
@@ -21,7 +20,11 @@ public class ContactRegistrationServlet extends HttpServlet {
         }
 
         Command command = CommandFactory.getCommandByAction(action);
-        command.processPage(request, response);
+        try {
+            command.processPage(request, response);
+        } catch (InvalidLabelException ex) {
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
