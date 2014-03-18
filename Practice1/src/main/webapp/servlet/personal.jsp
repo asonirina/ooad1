@@ -7,6 +7,7 @@
 
 
 <form method="post" action="Registration">
+    <input type="hidden" name="current" value="3">
     <input type=hidden name=action value=aSave>
     First Name: ${firstName}
     <br>

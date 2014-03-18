@@ -14,8 +14,8 @@ import java.io.IOException;
  */
 public class FinalCommand implements Command {
     @Override
-    public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvalidLabelException {
-        ContactService.putContact(request, 3);
+    public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ContactService.putContact(request);
         request.getRequestDispatcher("final.jsp").forward(request, response);
     }
 }

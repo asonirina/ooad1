@@ -12,5 +12,5 @@ import java.io.IOException;
  * Date: 17.03.14
  */
 public interface Command {
-    public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvalidLabelException;
+    public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

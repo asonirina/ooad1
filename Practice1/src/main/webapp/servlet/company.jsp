@@ -6,6 +6,7 @@
 <h1>Person's Company Registration</h1>
 
 <form method="POST" action="Registration">
+    <input type="hidden" name="current" value="2">
     <input type=hidden name=action value=aPersonalInfo>
     First Name:   ${firstName}
     <br>

@@ -8,6 +8,7 @@
 
 
 <form method="post" action="Registration" >
+    <input type="hidden" name="current" value="1">
     <input type=hidden name=action value=aCompany>
     First Name:
     <input type=text size=20 name=firstName>

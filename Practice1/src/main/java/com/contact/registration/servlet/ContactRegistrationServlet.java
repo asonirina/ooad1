@@ -3,9 +3,11 @@ package com.contact.registration.servlet;
 import com.contact.registration.command.Command;
 import com.contact.registration.exception.InvalidLabelException;
 import com.contact.registration.factory.CommandFactory;
+import com.contact.registration.filter.Filter;
+import com.contact.registration.filter.LabelFilter;
 
 import java.io.*;
-import javax.servlet.*;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 public class ContactRegistrationServlet extends HttpServlet {
@@ -18,13 +20,15 @@ public class ContactRegistrationServlet extends HttpServlet {
         if (action != null && action.length() > 0) {
             session.setAttribute("action", action);
         }
-
-        Command command = CommandFactory.getCommandByAction(action);
+        Filter chain = new LabelFilter(null);
         try {
-            command.processPage(request, response);
-        } catch (InvalidLabelException ex) {
+            chain.execute(request, response);
+        } catch (Exception ex) {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
+        Command command = CommandFactory.getInstance().getCommandByAction(action);
+        command.processPage(request, response);
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

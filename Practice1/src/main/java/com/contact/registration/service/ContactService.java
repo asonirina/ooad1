@@ -12,12 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ContactService {
 
-    public static Contact putContact(HttpServletRequest request, int label) throws InvalidLabelException {
-        if ((Integer) (request.getSession().getAttribute("current")) > label) {
-            throw new InvalidLabelException();
-        } else {
-            request.getSession().setAttribute("current", label);
-        }
+    public static Contact putContact(HttpServletRequest request) {
         Contact contact = getContact(request);
         if (contact == null) {
             contact = new Contact();

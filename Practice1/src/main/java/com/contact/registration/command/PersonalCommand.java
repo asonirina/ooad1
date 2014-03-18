@@ -15,8 +15,8 @@ import java.io.IOException;
  */
 public class PersonalCommand implements Command{
     @Override
-    public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvalidLabelException {
-        Contact contact = ContactService.putContact(request, 2);
+    public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Contact contact = ContactService.putContact(request);
         request.setAttribute("firstName",contact.getFirstName());
         request.setAttribute("lastName",contact.getLastName());
         request.setAttribute("company",contact.getCompany());
