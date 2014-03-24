@@ -16,7 +16,7 @@ import java.io.IOException;
 public class PersonalCommand implements Command{
     @Override
     public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Contact contact = ContactService.putContact(request);
+        Contact contact = ContactService.getContact(request);
         request.setAttribute("firstName",contact.getFirstName());
         request.setAttribute("lastName",contact.getLastName());
         request.setAttribute("company",contact.getCompany());

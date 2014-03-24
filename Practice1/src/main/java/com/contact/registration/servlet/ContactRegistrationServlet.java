@@ -5,6 +5,7 @@ import com.contact.registration.exception.InvalidLabelException;
 import com.contact.registration.factory.CommandFactory;
 import com.contact.registration.filter.Filter;
 import com.contact.registration.filter.LabelFilter;
+import com.contact.registration.filter.SaveContactFilter;
 
 import java.io.*;
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ public class ContactRegistrationServlet extends HttpServlet {
         if (action != null && action.length() > 0) {
             session.setAttribute("action", action);
         }
-        Filter chain = new LabelFilter(null);
+        Filter chain = new LabelFilter(new SaveContactFilter(null));
         try {
             chain.execute(request, response);
         } catch (Exception ex) {

@@ -15,7 +15,6 @@ import java.io.IOException;
 public class NameCommand implements Command {
     @Override
     public void processPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //request.getSession().setAttribute("current", 0);
         request.getRequestDispatcher("first_last.jsp").forward(request, response);
     }
 }
