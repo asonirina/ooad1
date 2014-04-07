@@ -7,7 +7,7 @@
 
 <form method="POST" action="Registration">
     <input type="hidden" name="current" value="2">
-    <input type=hidden name=action value=aPersonalInfo>
+    <input type=hidden name=action value=aPersonal>
     First Name:   ${firstName}
     <br>
     Last Name: ${lastName}

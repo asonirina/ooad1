@@ -11,7 +11,7 @@ public class Contact {
     private String hobby;
 
     public String getFirstName() {
-        return firstName;
+        return firstName != null ? firstName : "";
     }
 
     public void setFirstName(String firstName) {
@@ -19,7 +19,7 @@ public class Contact {
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName != null ? lastName : "";
     }
 
     public void setLastName(String lastName) {
@@ -27,7 +27,7 @@ public class Contact {
     }
 
     public String getCompany() {
-        return company;
+        return company != null ? company : "";
     }
 
     public void setCompany(String company) {
@@ -35,7 +35,7 @@ public class Contact {
     }
 
     public String getHobby() {
-        return hobby;
+        return hobby != null ? hobby : "";
     }
 
     public void setHobby(String hobby) {
