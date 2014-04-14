@@ -22,13 +22,14 @@ public class ContactRegistrationServlet extends HttpServlet {
             session.setAttribute("action", action);
         }
         Filter chain = new LabelFilter(new SaveContactFilter(null));
+        Command command = CommandFactory.getInstance().getCommandByAction(action);
         try {
             chain.execute(request, response);
+            command.processPage(request, response);
         } catch (Exception ex) {
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            //request.getRequestDispatcher("error.jsp").forward(request, response);
+            command.doError(request, response);
         }
-        Command command = CommandFactory.getInstance().getCommandByAction(action);
-        command.processPage(request, response);
 
     }
 
