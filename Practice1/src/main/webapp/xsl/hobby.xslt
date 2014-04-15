@@ -11,7 +11,7 @@
                     <input type="hidden" name="current" value="3"/>
                     <input type="hidden" name="action" value="aSave"/>
 
-                    <xsl:apply-templates select="contact"/>
+                    <xsl:apply-templates select="contacts/contact"/>
 
                     Hobby: <input type="text" size="20" name="hobby"/>
                     <br/>
@@ -21,7 +21,7 @@
         </html>
     </xsl:template>
 
-    <xsl:template match="contact">
+    <xsl:template match="contacts/contact">
         FirstName:
         <xsl:value-of select="firstName"/>
         <br/>

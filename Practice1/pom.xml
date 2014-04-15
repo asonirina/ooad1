@@ -28,6 +28,13 @@
           <version>3.0</version>
       </dependency>
 
+      <dependency>
+          <groupId>org.apache.xmlbeans</groupId>
+          <artifactId>xmlbeans-xpath</artifactId>
+          <version>2.3.0</version>
+      </dependency>
+
+
   </dependencies>
   <build>
     <finalName>Practice1</finalName>

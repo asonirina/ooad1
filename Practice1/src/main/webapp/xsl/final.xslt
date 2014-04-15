@@ -10,6 +10,30 @@
                 <P>
                     Contact has been saved successfully
                 </P>
+
+                <xsl:for-each select="contacts/contact">
+                    FirstName:
+                    <xsl:value-of select="firstName"/>
+                    <br/>
+                    LastName:
+                    <xsl:value-of select="lastName"/>
+                    <br/>
+                    Company:
+                    <xsl:value-of select="company"/>
+                    <br/>
+                    Hobby:
+                    <xsl:value-of select="hobby"/>
+                    <br/>
+                    <br/>
+                </xsl:for-each>
+
+                <form action="Registration">
+                    <input type="hidden" name="action" value="viewContact"/>
+                    <input type="submit" value="Back" name="Back"/>
+                    <input type="text" name="page" value="{/contacts/page}"/>
+                    <input type="submit" value="Next" name="Next"/>
+                </form>
+
             </body>
         </html>
     </xsl:template>

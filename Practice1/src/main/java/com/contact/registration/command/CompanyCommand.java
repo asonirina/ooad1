@@ -27,8 +27,9 @@ public class CompanyCommand extends Command {
     public CompanyCommand() throws Exception {
         super();
         template = transFact.newTemplates(
-                new StreamSource(new FileInputStream("C:/Users/iason/ooad1/Practice1/src/main/webapp/xsl/company.xslt")));
+                new StreamSource(new FileInputStream("C:/Users/iason/work/ooad1/Practice1/src/main/webapp/xsl/company.xslt")));
     }
+
 
 //    @Override
 //    public void processPage(HttpServletRequest request, HttpServletResponse response) throws Exception {

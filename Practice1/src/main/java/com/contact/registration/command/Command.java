@@ -27,7 +27,7 @@ public abstract class Command {
 
     public Command() throws Exception {
         errorTemplate = transFact.newTemplates(
-                new StreamSource(new FileInputStream("C:/Users/iason/ooad1/Practice1/src/main/webapp/xsl/error.xslt")));
+                new StreamSource(new FileInputStream("C:/Users/iason/work/ooad1/Practice1/src/main/webapp/xsl/error.xslt")));
     }
 
     public void processPage(HttpServletRequest request, HttpServletResponse response) throws Exception {

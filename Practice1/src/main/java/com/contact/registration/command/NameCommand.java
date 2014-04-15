@@ -21,7 +21,7 @@ public class NameCommand extends Command {
         super();
 
         template = transFact.newTemplates(
-                new StreamSource(new FileInputStream("C:/Users/iason/ooad1/Practice1/src/main/webapp/xsl/first_last.xslt")));
+                new StreamSource(new FileInputStream("C:/Users/iason/work/ooad1/Practice1/src/main/webapp/xsl/first_last.xslt")));
     }
 //    @Override
 //    public void processPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
