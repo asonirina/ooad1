@@ -4,6 +4,7 @@ import com.contact.registration.dao.ContactDao;
 import com.contact.registration.exception.InvalidLabelException;
 import com.contact.registration.model.Contact;
 import com.contact.registration.service.ContactService;
+import com.contact.registration.uow.UOWController;
 import org.w3c.dom.Document;
 
 import javax.servlet.ServletException;
@@ -39,6 +40,7 @@ public class FinalCommand extends Command {
 
     public void processPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Contact contact = ContactService.getContact(request);
+        UOWController.getInstance().commit();
 
 //        int page = request.getParameter("page") == null ? 0 : Integer.parseInt(request.getParameter("page"));
 //        if (request.getParameter("Forward") != null) {

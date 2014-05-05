@@ -3,6 +3,7 @@ package com.contact.registration.service;
 
 import com.contact.registration.exception.InvalidLabelException;
 import com.contact.registration.model.Contact;
+import com.contact.registration.uow.UOWController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ public class ContactService {
         Contact contact = getContact(request);
         if (contact == null) {
             contact = new Contact();
+            UOWController.getInstance().load(contact);
         }
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
