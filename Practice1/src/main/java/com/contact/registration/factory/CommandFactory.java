@@ -2,6 +2,8 @@ package com.contact.registration.factory;
 
 import com.contact.registration.command.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,15 +14,12 @@ import java.util.Properties;
  * Date: 17.03.14
  */
 public class CommandFactory {
-    private Properties prop = new Properties();
     private static CommandFactory instance;
+    private ApplicationContext context =
+            new FileSystemXmlApplicationContext("context.xml");
+
 
     private CommandFactory() {
-        try {
-            prop.load(CommandFactory.class.getClassLoader().getResourceAsStream("command.properties"));
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 
     public static CommandFactory getInstance() {
@@ -31,17 +30,9 @@ public class CommandFactory {
     }
 
     public Command getCommandByAction(String action) {
-        Command command = null;
         if (StringUtils.isBlank(action)) {
             action = "aName";
         }
-        String className = prop.getProperty(action);
-        try {
-            command = (Command) Class.forName(className).newInstance();
-        } catch (Exception ex) {
-
-        }
-
-        return command;
+        return (Command) context.getBean(action);
     }
 }
