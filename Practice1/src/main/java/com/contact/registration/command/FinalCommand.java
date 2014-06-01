@@ -1,6 +1,5 @@
 package com.contact.registration.command;
 
-import com.contact.registration.dao.ContactDao;
 import com.contact.registration.exception.InvalidLabelException;
 import com.contact.registration.model.Contact;
 import com.contact.registration.service.ContactService;
@@ -29,7 +28,7 @@ import java.util.List;
  */
 public class FinalCommand extends Command {
 
-    ContactDao dao = new ContactDao();
+//    ContactDao dao = new ContactDao();
     private final int OFFSET = 3;
 
     public FinalCommand() throws Exception {
@@ -42,20 +41,7 @@ public class FinalCommand extends Command {
         Contact contact = ContactService.getContact(request);
         UOWController.getInstance().commit();
 
-//        int page = request.getParameter("page") == null ? 0 : Integer.parseInt(request.getParameter("page"));
-//        if (request.getParameter("Forward") != null) {
-//            if (page < dao.getSize(OFFSET)) {
-//                page++;
-//            }
-//        } else {
-//            if (request.getParameter("Back") != null) {
-//                if (page > 1) {
-//                    page--;
-//                }
-//            }
-//        }
         File f = new File("contacts.xml");
-//        if (contact != null) {
             Document saveDoc = service.addToDOMDocument(contact, f);
 
             TransformerFactory tFactory =
@@ -65,8 +51,7 @@ public class FinalCommand extends Command {
             DOMSource source = new DOMSource(saveDoc);
             StreamResult result = new StreamResult(new FileOutputStream(f, false));
             transformer.transform(source, result);
-//        }
-        List<Contact> contacts = dao.getContacts(0, OFFSET);
+        List<Contact> contacts = UOWController.getInstance().getByPage(0);
         try {
             Document domDoc = service.produceDOMDocument(contacts, 0);
             template.newTransformer().transform(new DOMSource(domDoc), new StreamResult(response.getWriter()));

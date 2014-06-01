@@ -1,8 +1,8 @@
 package com.contact.registration.command;
 
-import com.contact.registration.dao.ContactDao;
 import com.contact.registration.model.Contact;
 import com.contact.registration.service.ContactService;
+import com.contact.registration.uow.UOWController;
 import org.w3c.dom.Document;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +23,6 @@ import java.util.List;
  */
 public class ViewCommand extends Command {
 
-    ContactDao dao = new ContactDao();
-    private final int OFFSET = 3;
-
     public ViewCommand() throws Exception {
         super();
         template = transFact.newTemplates(
@@ -36,7 +33,7 @@ public class ViewCommand extends Command {
 
         int page = request.getParameter("page") == null ? 0 : Integer.parseInt(request.getParameter("page")) - 1;
         if (request.getParameter("Next") != null) {
-            if (page < dao.getSize(OFFSET)) {
+            if (page < UOWController.getInstance().getSize()) {
                 page++;
             }
         } else {
@@ -46,7 +43,7 @@ public class ViewCommand extends Command {
                 }
             }
         }
-        List<Contact> contacts = dao.getContacts(page, OFFSET);
+        List<Contact> contacts = UOWController.getInstance().getByPage(page);
         try {
             Document domDoc = service.produceDOMDocument(contacts, page);
             template.newTransformer().transform(new DOMSource(domDoc), new StreamResult(response.getWriter()));

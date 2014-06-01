@@ -12,8 +12,9 @@ import java.util.Map;
  * Date: 05.05.14
  */
 public class ConcreteDao implements BaseDao {
-    List<Contact> contacts = new ArrayList<Contact>();
-   private static BaseDao dao;
+    private List<Contact> contacts = new ArrayList<Contact>();
+
+    private static BaseDao dao;
 
     public static BaseDao getInstance() {
         if (dao == null) {
@@ -23,7 +24,7 @@ public class ConcreteDao implements BaseDao {
     }
 
     private ConcreteDao() {
-      contacts.add(new Contact());
+        contacts.add(new Contact());
     }
 
     @Override
@@ -47,23 +48,11 @@ public class ConcreteDao implements BaseDao {
         Contact c = new Contact();
         c.setId(id);
         int index = contacts.indexOf(c);
-        if(index==-1) {
+        if (index == -1) {
             return null;
         } else {
             return contacts.get(index);
         }
     }
 
-    public static void main(String[] args) {
-        BaseDao dao1 =  ConcreteDao.getInstance();
-
-        Contact c = dao1.list().get(0);
-
-        Contact c1 = new Contact();
-        c1.setId(c.getId());
-        c1.setCompany("hjkhkhj");
-        dao1.update(c1);
-        System.out.println();
-
-    }
 }

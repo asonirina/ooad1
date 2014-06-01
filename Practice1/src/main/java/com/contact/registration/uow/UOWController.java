@@ -13,11 +13,11 @@ import java.util.List;
  * Date: 05.05.14
  */
 public class UOWController {
-
     private static UOWController instance;
     List<Contact> sourceObjects;
     List<Contact> changedObjects;
     private BaseDao dao = ConcreteDao.getInstance();
+    private int offset = 3;
 
     public static UOWController getInstance() {
         if (instance == null) {
@@ -49,5 +49,20 @@ public class UOWController {
                 }
             }
         }
+    }
+
+    public int getSize() {
+        int length = dao.list().size();
+        int ost = length % offset == 0 ? -1 : 0;
+        return length / offset + ost;
+    }
+
+    public List<Contact> getByPage(int page) {
+       List<Contact> contactList = dao.list();
+        List<Contact> res = new ArrayList<Contact>();
+        for (int i = page*offset; i<offset*(page+1)|| i<contactList.size(); i++) {
+           res.add(contactList.get(i));
+        }
+        return res;
     }
 }
